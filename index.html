@@ -1,0 +1,731 @@
+<html lang="fa" dir="rtl"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>کارتابل تیم | رضا، زهرا، سبحان</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: system-ui, 'Segoe UI', 'Tahoma', 'Vazirmatn', 'Roboto', sans-serif;
+        }
+
+        body {
+            background: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            padding: 24px 28px;
+        }
+
+        h1 {
+            font-size: 1.9rem;
+            margin: 0 0 6px 0;
+            color: #1e2a3e;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        h1 small {
+            font-size: 0.8rem;
+            background: #e9edf2;
+            padding: 6px 12px;
+            border-radius: 40px;
+            font-weight: normal;
+            color: #2c3e66;
+        }
+
+        .sub {
+            color: #4a627a;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 18px;
+            margin-bottom: 28px;
+        }
+
+        .task-form {
+            background: #f8fafc;
+            border-radius: 28px;
+            padding: 20px 24px;
+            margin-bottom: 32px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #e2edf2;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 160px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #0f2b3d;
+            font-size: 0.85rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 18px;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            background: white;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        button {
+            background: #1e293b;
+            border: none;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        button.primary {
+            background: #0f3b5c;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        button.primary:hover {
+            background: #1e4a76;
+            transform: scale(0.97);
+        }
+
+        button.secondary {
+            background: #475569;
+        }
+        button.secondary:hover {
+            background: #334155;
+        }
+
+        button.danger {
+            background: #b91c1c;
+        }
+        button.danger:hover {
+            background: #991b1b;
+        }
+
+        button.success {
+            background: #2b6e3c;
+        }
+        button.warning {
+            background: #b45309;
+        }
+
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 28px;
+            align-items: flex-end;
+            background: #ffffffdd;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e7ef;
+        }
+
+        .filter-group {
+            min-width: 140px;
+        }
+
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .task-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 24px;
+            padding: 18px 20px;
+            transition: 0.1s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+
+        .task-card.completed {
+            background: #f9fafb;
+            border-right: 8px solid #34a853;
+            opacity: 0.9;
+        }
+
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .task-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0c1e2e;
+        }
+
+        .task-badges {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            padding: 4px 12px;
+            border-radius: 40px;
+            background: #eef2ff;
+            color: #1e3a8a;
+        }
+
+        .badge.assignee {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .badge.due {
+            background: #fff3e3;
+            color: #b45309;
+        }
+
+        .badge.overdue {
+            background: #fee2e2;
+            color: #b91c1c;
+            font-weight: bold;
+        }
+
+        .badge.completed-date {
+            background: #dff0e4;
+            color: #1f6e43;
+        }
+
+        .task-desc {
+            color: #2d3e50;
+            margin: 12px 0;
+            line-height: 1.45;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+        }
+
+        button.small {
+            padding: 5px 14px;
+            font-size: 0.75rem;
+        }
+
+        .empty-msg {
+            text-align: center;
+            padding: 50px 20px;
+            background: #f9f9fd;
+            border-radius: 40px;
+            color: #5b6e8c;
+        }
+
+        hr {
+            margin: 24px 0;
+        }
+
+        footer {
+            margin-top: 32px;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #6c7e97;
+            border-top: 1px solid #e2edf2;
+            padding-top: 20px;
+        }
+        @media (max-width: 700px) {
+            .container {
+                padding: 16px;
+            }
+            .form-row {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>
+        📋 کارتابل تیم 
+        <small>مدیر: رضا هادی&zwnj;زاده</small>
+    </h1>
+    <div class="sub">✅ تعریف کار ← ارجاع به زهرا علینژاد یا سبحان دهقانی ← ثبت تاریخ انجام</div>
+
+    <!-- فرم افزودن/ویرایش -->
+    <div class="task-form">
+        <div class="form-row">
+            <div class="form-group">
+                <label>📌 عنوان کار</label>
+                <input type="text" id="taskTitle" placeholder="مثال: تهیه گزارش ماهانه">
+            </div>
+            <div class="form-group">
+                <label>👤 مسئول انجام</label>
+                <select id="taskAssignee">
+                    <option value="زهرا علینژاد">زهرا علینژاد</option>
+                    <option value="سبحان دهقانی">سبحان دهقانی</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>📅 تاریخ مقرر (سررسید)</label>
+                <input type="date" id="taskDueDate">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>📝 توضیحات (اختیاری)</label>
+                <textarea id="taskDesc" placeholder="جزییات کار ..."></textarea>
+            </div>
+        </div>
+        <div class="btn-group">
+            <button class="primary" id="addBtn">➕ افزودن کار جدید</button>
+            <button class="secondary" id="cancelEditBtn" style="display: none;">❌ لغو ویرایش</button>
+        </div>
+    </div>
+
+    <!-- نوار فیلتر و ابزار همگام&zwnj;سازی -->
+    <div class="filter-bar">
+        <div class="filter-group">
+            <label>فیلتر بر اساس مسئول</label>
+            <select id="filterAssignee">
+                <option value="all">همه افراد</option>
+                <option value="زهرا علینژاد">زهرا علینژاد</option>
+                <option value="سبحان دهقانی">سبحان دهقانی</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>وضعیت انجام</label>
+            <select id="filterStatus">
+                <option value="all">همه</option>
+                <option value="pending">در انتظار</option>
+                <option value="completed">انجام شده</option>
+            </select>
+        </div>
+        <div style="flex:1"></div>
+        <div class="btn-group">
+            <button id="exportBtn" class="secondary small">📥 خروجی JSON</button>
+            <label for="importFileInput" class="secondary small" style="background:#475569; padding:5px 14px; border-radius:40px; cursor:pointer; font-size:0.75rem;">📂 ورودی JSON</label>
+            <input type="file" id="importFileInput" accept=".json" style="display:none;">
+            <button id="clearAllBtn" class="danger small">🗑️ پاک کردن همه</button>
+        </div>
+    </div>
+
+    <!-- لیست وظایف -->
+    <div id="taskListContainer" class="task-list">
+                <div class="task-card " data-id="1780653938481">
+                    <div class="task-header">
+                        <span class="task-title">بررسی مستندات پروژه X</span>
+                        <div class="task-badges">
+                            <span class="badge assignee">👤 زهرا علینژاد</span>
+                            <span class="badge due">📆 سررسید: 2026-06-10</span>
+                            <span class="badge" style="background:#fff0db;">⏳ در انتظار</span>
+                            
+                        </div>
+                    </div>
+                    <div class="task-desc">📄 مستندات فنی را مرور کرده و نقاط قوت و ضعف را یادداشت کنید.</div>
+                    <div class="task-actions">
+                        <button class="small success" onclick="toggleComplete(1780653938481)">✔️ ثبت انجام</button>
+                        <button class="small primary" onclick="editTask(1780653938481)">✏️ ویرایش</button>
+                        <button class="small danger" onclick="deleteTask(1780653938481)">🗑️ حذف</button>
+                    </div>
+                </div>
+            
+                <div class="task-card " data-id="1780653938482">
+                    <div class="task-header">
+                        <span class="task-title">طراحی لوگو جدید شرکت</span>
+                        <div class="task-badges">
+                            <span class="badge assignee">👤 سبحان دهقانی</span>
+                            <span class="badge due">📆 سررسید: 2026-06-10</span>
+                            <span class="badge" style="background:#fff0db;">⏳ در انتظار</span>
+                            
+                        </div>
+                    </div>
+                    <div class="task-desc">📄 سه طرح اولیه آماده شود.</div>
+                    <div class="task-actions">
+                        <button class="small success" onclick="toggleComplete(1780653938482)">✔️ ثبت انجام</button>
+                        <button class="small primary" onclick="editTask(1780653938482)">✏️ ویرایش</button>
+                        <button class="small danger" onclick="deleteTask(1780653938482)">🗑️ حذف</button>
+                    </div>
+                </div>
+            </div>
+    <footer>
+        📌 داده&zwnj;ها در مرورگر شما ذخیره می&zwnj;شود (localStorage). برای همگام&zwnj;سازی بین تیم: مدیر خروجی بگیرد و بقیه وارد کنند.
+        <br>✅ تاریخ انجام به صورت خودکار در لحظه علامت «انجام شده» ثبت می&zwnj;شود.
+    </footer>
+</div>
+
+<script>
+    // ---------- اعضای تیم ----------
+    const TEAM_MEMBERS = ['زهرا علینژاد', 'سبحان دهقانی'];  // فقط این دو نفر کار انجام می&zwnj;دهند
+    const MANAGER = 'رضا هادی&zwnj;زاده';
+
+    // مدل داده ها
+    let tasks = [];       // هر task: { id, title, desc, assignee, dueDate, completed, completedDate }
+    let editModeId = null;
+
+    // المان های DOM
+    const taskTitleEl = document.getElementById('taskTitle');
+    const taskAssigneeEl = document.getElementById('taskAssignee');
+    const taskDueDateEl = document.getElementById('taskDueDate');
+    const taskDescEl = document.getElementById('taskDesc');
+    const addBtn = document.getElementById('addBtn');
+    const cancelEditBtn = document.getElementById('cancelEditBtn');
+    const filterAssigneeEl = document.getElementById('filterAssignee');
+    const filterStatusEl = document.getElementById('filterStatus');
+    const taskListContainer = document.getElementById('taskListContainer');
+    const exportBtn = document.getElementById('exportBtn');
+    const importFileInput = document.getElementById('importFileInput');
+    const clearAllBtn = document.getElementById('clearAllBtn');
+
+    // ------------------ ذخیره و بارگذاری از localStorage ------------------
+    function saveTasksToLocal() {
+        localStorage.setItem('company_taskboard_v2', JSON.stringify(tasks));
+    }
+
+    function loadTasksFromLocal() {
+        const stored = localStorage.getItem('company_taskboard_v2');
+        if (stored) {
+            try {
+                tasks = JSON.parse(stored);
+                if (!Array.isArray(tasks)) tasks = [];
+                // برای داده&zwnj;های قدیمی که completedDate ندارند، مقداردهی اولیه
+                tasks = tasks.map(t => {
+                    if (t.completed === undefined) t.completed = false;
+                    if (!t.completedDate && t.completed) t.completedDate = new Date().toISOString().split('T')[0];
+                    return t;
+                });
+            } catch(e) { tasks = []; }
+        }
+        if (!tasks || tasks.length === 0) {
+            // وظایف نمونه
+            const today = new Date().toISOString().split('T')[0];
+            const nextWeek = new Date();
+            nextWeek.setDate(nextWeek.getDate() + 5);
+            const dueSample = nextWeek.toISOString().split('T')[0];
+            tasks = [
+                {
+                    id: Date.now() + 1,
+                    title: "بررسی مستندات پروژه X",
+                    desc: "مستندات فنی را مرور کرده و نقاط قوت و ضعف را یادداشت کنید.",
+                    assignee: "زهرا علینژاد",
+                    dueDate: dueSample,
+                    completed: false,
+                    completedDate: null
+                },
+                {
+                    id: Date.now() + 2,
+                    title: "طراحی لوگو جدید شرکت",
+                    desc: "سه طرح اولیه آماده شود.",
+                    assignee: "سبحان دهقانی",
+                    dueDate: dueSample,
+                    completed: false,
+                    completedDate: null
+                }
+            ];
+            saveTasksToLocal();
+        }
+    }
+
+    // ------------------ رندر کردن لیست با فیلترها ------------------
+    function renderTasks() {
+        const filterAssignee = filterAssigneeEl.value;
+        const filterStatus = filterStatusEl.value;
+
+        let filtered = [...tasks];
+        if (filterAssignee !== 'all') {
+            filtered = filtered.filter(t => t.assignee === filterAssignee);
+        }
+        if (filterStatus === 'pending') {
+            filtered = filtered.filter(t => !t.completed);
+        } else if (filterStatus === 'completed') {
+            filtered = filtered.filter(t => t.completed);
+        }
+
+        if (filtered.length === 0) {
+            taskListContainer.innerHTML = `<div class="empty-msg">✨ هیچ کاری یافت نشد. وظیفه جدید اضافه کنید.</div>`;
+            return;
+        }
+
+        const today = new Date().toISOString().split('T')[0];
+        taskListContainer.innerHTML = filtered.map(task => {
+            const isOverdue = (!task.completed && task.dueDate && task.dueDate < today);
+            const dueClass = isOverdue ? 'badge overdue' : 'badge due';
+            const dueText = isOverdue ? '⚠️ دیرکرد' : '📆 سررسید';
+            
+            // نمایش تاریخ انجام در صورت وجود
+            const completedDateHtml = task.completed && task.completedDate 
+                ? `<span class="badge completed-date">✅ تاریخ انجام: ${task.completedDate}</span>` 
+                : '';
+
+            return `
+                <div class="task-card ${task.completed ? 'completed' : ''}" data-id="${task.id}">
+                    <div class="task-header">
+                        <span class="task-title">${escapeHtml(task.title)}</span>
+                        <div class="task-badges">
+                            <span class="badge assignee">👤 ${escapeHtml(task.assignee)}</span>
+                            <span class="${dueClass}">${dueText}: ${task.dueDate || 'نامشخص'}</span>
+                            ${task.completed ? '<span class="badge" style="background:#dff0e4; color:#1f6e43;">✓ انجام شده</span>' : '<span class="badge" style="background:#fff0db;">⏳ در انتظار</span>'}
+                            ${completedDateHtml}
+                        </div>
+                    </div>
+                    ${task.desc ? `<div class="task-desc">📄 ${escapeHtml(task.desc)}</div>` : ''}
+                    <div class="task-actions">
+                        ${!task.completed ? `<button class="small success" onclick="toggleComplete(${task.id})">✔️ ثبت انجام</button>` : `<button class="small secondary" onclick="toggleComplete(${task.id})">↩️ لغو انجام</button>`}
+                        <button class="small primary" onclick="editTask(${task.id})">✏️ ویرایش</button>
+                        <button class="small danger" onclick="deleteTask(${task.id})">🗑️ حذف</button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    // ------------------ عملیات CRUD ------------------
+    function addOrUpdateTask() {
+        const title = taskTitleEl.value.trim();
+        const assignee = taskAssigneeEl.value;
+        const dueDate = taskDueDateEl.value;
+        const desc = taskDescEl.value.trim();
+
+        if (!title) {
+            alert('لطفا عنوان کار را وارد کنید');
+            return;
+        }
+        if (!dueDate) {
+            alert('لطفا تاریخ مقرر (سررسید) را انتخاب کنید');
+            return;
+        }
+
+        if (editModeId !== null) {
+            // حالت ویرایش
+            const index = tasks.findIndex(t => t.id === editModeId);
+            if (index !== -1) {
+                // اگر کار قبلاً انجام شده بود و ما داریم ویرایش می&zwnj;کنیم، بهتر است وضعیت انجام را بازنشانی کنیم؟
+                // بنا به منطق: ویرایش کار انجام&zwnj;شده احتمالاً نیاز به reset دارد. برای سادگی، اگر کار انجام شده بود، پس از ویرایش آن را به pending برگردانیم.
+                const wasCompleted = tasks[index].completed;
+                tasks[index] = {
+                    ...tasks[index],
+                    title: title,
+                    assignee: assignee,
+                    dueDate: dueDate,
+                    desc: desc,
+                    completed: wasCompleted ? false : tasks[index].completed, // اگر انجام شده بود، با ویرایش دوباره در انتظار می&zwnj;شود
+                    completedDate: wasCompleted ? null : tasks[index].completedDate
+                };
+            }
+            editModeId = null;
+            addBtn.textContent = '➕ افزودن کار جدید';
+            cancelEditBtn.style.display = 'none';
+        } else {
+            // حالت افزودن
+            const newTask = {
+                id: Date.now(),
+                title: title,
+                desc: desc,
+                assignee: assignee,
+                dueDate: dueDate,
+                completed: false,
+                completedDate: null
+            };
+            tasks.push(newTask);
+        }
+        // پاک کردن فرم
+        taskTitleEl.value = '';
+        taskDescEl.value = '';
+        taskDueDateEl.value = '';
+        saveTasksToLocal();
+        renderTasks();
+    }
+
+    function editTask(id) {
+        const task = tasks.find(t => t.id === id);
+        if (!task) return;
+        taskTitleEl.value = task.title;
+        taskAssigneeEl.value = task.assignee;
+        taskDueDateEl.value = task.dueDate;
+        taskDescEl.value = task.desc || '';
+        editModeId = id;
+        addBtn.textContent = '✏️ بروزرسانی کار';
+        cancelEditBtn.style.display = 'inline-flex';
+        document.querySelector('.task-form').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function cancelEdit() {
+        editModeId = null;
+        addBtn.textContent = '➕ افزودن کار جدید';
+        cancelEditBtn.style.display = 'none';
+        taskTitleEl.value = '';
+        taskDescEl.value = '';
+        taskDueDateEl.value = '';
+    }
+
+    function deleteTask(id) {
+        if (confirm('آیا از حذف این کار اطمینان دارید؟')) {
+            tasks = tasks.filter(t => t.id !== id);
+            if (editModeId === id) cancelEdit();
+            saveTasksToLocal();
+            renderTasks();
+        }
+    }
+
+    function toggleComplete(id) {
+        const task = tasks.find(t => t.id === id);
+        if (task) {
+            const newCompleted = !task.completed;
+            task.completed = newCompleted;
+            if (newCompleted) {
+                // ثبت تاریخ انجام امروز
+                const today = new Date().toISOString().split('T')[0];
+                task.completedDate = today;
+            } else {
+                task.completedDate = null;
+            }
+            saveTasksToLocal();
+            renderTasks();
+        }
+    }
+
+    // ------------------ همگام&zwnj;سازی با فایل JSON ------------------
+    function exportToJson() {
+        const dataStr = JSON.stringify(tasks, null, 2);
+        const blob = new Blob([dataStr], {type: 'application/json'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `taskboard_${new Date().toISOString().slice(0,19)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+
+    function importFromJson(file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const importedTasks = JSON.parse(e.target.result);
+                if (Array.isArray(importedTasks)) {
+                    if (confirm('ورودی فایل جایگزین تمام کارهای فعلی می&zwnj;شود. ادامه می&zwnj;دهید؟')) {
+                        tasks = importedTasks;
+                        tasks = tasks.map(t => {
+                            if (!t.id) t.id = Date.now() + Math.random();
+                            if (t.completed === undefined) t.completed = false;
+                            if (!t.dueDate) t.dueDate = new Date().toISOString().split('T')[0];
+                            if (!t.completedDate && t.completed) t.completedDate = new Date().toISOString().split('T')[0];
+                            return t;
+                        });
+                        saveTasksToLocal();
+                        renderTasks();
+                        cancelEdit();
+                        alert('وظایف با موفقیت جایگزین شدند');
+                    }
+                } else {
+                    alert('فایل انتخابی معتبر نیست (آرایه از تسک&zwnj;ها لازم است)');
+                }
+            } catch(err) {
+                alert('خطا در خواندن فایل: ' + err.message);
+            }
+        };
+        reader.readAsText(file);
+    }
+
+    function clearAllTasks() {
+        if (confirm('⚠️ هشدار: تمام وظایف حذف می&zwnj;شوند. ادامه می&zwnj;دهید؟')) {
+            tasks = [];
+            saveTasksToLocal();
+            renderTasks();
+            cancelEdit();
+        }
+    }
+
+    // ------------------ رویدادها و مقداردهی اولیه ------------------
+    function handleFilterChange() {
+        renderTasks();
+    }
+
+    function init() {
+        loadTasksFromLocal();
+        renderTasks();
+
+        addBtn.addEventListener('click', addOrUpdateTask);
+        cancelEditBtn.addEventListener('click', cancelEdit);
+        filterAssigneeEl.addEventListener('change', handleFilterChange);
+        filterStatusEl.addEventListener('change', handleFilterChange);
+        exportBtn.addEventListener('click', exportToJson);
+        clearAllBtn.addEventListener('click', clearAllTasks);
+        importFileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files[0]) {
+                importFromJson(e.target.files[0]);
+                importFileInput.value = '';
+            }
+        });
+
+        if (!taskDueDateEl.value) {
+            const defaultDate = new Date();
+            defaultDate.setDate(defaultDate.getDate() + 3);
+            taskDueDateEl.value = defaultDate.toISOString().split('T')[0];
+        }
+    }
+
+    window.toggleComplete = toggleComplete;
+    window.editTask = editTask;
+    window.deleteTask = deleteTask;
+
+    init();
+</script>
+
+</body></html>
